@@ -17,41 +17,41 @@ async function run() {
   try {
     await client.connect();
     const database = client.db("allDataCollection");
-    const CollectionOne = database.collection("collectionOne");
-    const CollectionTwo = database.collection("collectionTwo");
-    const CollectionThree = database.collection("collectionThree");
-    const CollectionFour = database.collection("collectionFour");
-    const CollectionFive = database.collection("offersCollection");
+    const CollectionBus = database.collection("collectionOne");
+    const CollectionTour = database.collection("collectionTwo");
+    const CollectionFlights = database.collection("collectionThree");
+    const CollectionHotel = database.collection("collectionFour");
+    // const CollectionFive = database.collection("offersCollection");
     const bookingCollection = database.collection("bookingCollection");
    
 
  // GET API REVIEWS
  app.get('/busInfo', async (req,res)=>{
-  const cursor = CollectionOne.find({});
+  const cursor = CollectionBus.find({});
   const bus = await cursor.toArray();
   res.send(bus);
 
  });
  app.get('/tourInfo', async (req,res)=>{
-  const cursor = CollectionTwo.find({});
+  const cursor = CollectionTour.find({});
   const tour = await cursor.toArray();
   res.send(tour);
 
  });
  app.get('/flightInfo', async (req,res)=>{
-  const cursor = CollectionThree.find({});
+  const cursor = CollectionFlights.find({});
   const flight = await cursor.toArray();
   res.send(flight);
 
  });
  app.get('/hotelInfo', async (req,res)=>{
-  const cursor = CollectionFour.find({});
+  const cursor = CollectionHotel.find({});
   const hotel = await cursor.toArray();
   res.send(hotel);
 
  });
  app.get('/offersInfo', async (req,res)=>{
-  const cursor = CollectionFive.find({});
+  const cursor = CollectionHotel.find({});
   const hotel = await cursor.toArray();
   res.send(hotel);
 
@@ -61,7 +61,7 @@ async function run() {
   app.get('/offers/:id', async (req,res)=>{
     const id = req.params.id;
     const query = {_id: ObjectId(id)};
-    const booking = await CollectionFive.findOne(query)
+    const booking = await CollectionHotel.findOne(query)
   res.json(booking);
   });
   
@@ -69,21 +69,21 @@ async function run() {
   app.get('/flights/:id', async (req,res)=>{
     const id = req.params.id;
     const query = {_id: ObjectId(id)};
-    const booking = await CollectionThree.findOne(query)
+    const booking = await CollectionFlights.findOne(query)
   res.json(booking);
   });
   // GET SINGLE OFFERS
   app.get('/tours/:id', async (req,res)=>{
     const id = req.params.id;
     const query = {_id: ObjectId(id)};
-    const booking = await CollectionTwo.findOne(query)
+    const booking = await CollectionTour.findOne(query)
   res.json(booking);
   });
   // GET SINGLE OFFERS
   app.get('/bus/:id', async (req,res)=>{
     const id = req.params.id;
     const query = {_id: ObjectId(id)};
-    const booking = await CollectionOne.findOne(query)
+    const booking = await CollectionBus.findOne(query)
   res.json(booking);
   });
  
