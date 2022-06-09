@@ -25,7 +25,7 @@ async function run() {
     const bookingCollection = database.collection("bookingCollection");
    
 
- // GET API REVIEWS
+ //Here all get information
  app.get('/busInfo', async (req,res)=>{
   const cursor = CollectionBus.find({});
   const bus = await cursor.toArray();
@@ -55,6 +55,12 @@ async function run() {
   const hotel = await cursor.toArray();
   res.send(hotel);
 
+ });
+
+ app.get('/booking', async (req,res)=>{
+  const cursor = bookingCollection.find({});
+  const booking = await cursor.toArray();
+  res.send(booking);
  });
  
   // GET SINGLE OFFERS
@@ -87,6 +93,13 @@ async function run() {
   res.json(booking);
   });
  
+  // here get booking data
+  app.post('/booking/:id', async (req,res) => {
+    const id =req.params.id;
+    const query={_id:ObjectId(id)}
+    const result = await bookingCollection.findOne(query);
+    res.json( result)
+  })
   // here put booking data
   app.post('/booking', async (req,res) => {
     const user = req.body;
