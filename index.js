@@ -64,6 +64,14 @@ async function run() {
  });
  
   // GET SINGLE OFFERS
+
+  
+  // GET LOGGED USER ORDERS
+  app.get('/booking/:email', async (req,res)=>{
+    const result = await bookingCollection.find({email: req.params.email}).toArray();
+    res.json(result)
+  })
+
   app.get('/offers/:id', async (req,res)=>{
     const id = req.params.id;
     const query = {_id: ObjectId(id)};
