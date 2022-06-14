@@ -26,6 +26,7 @@ async function run() {
    
 
  //Here all get information
+
  app.get('/busInfo', async (req,res)=>{
   const cursor = CollectionBus.find({});
   const bus = await cursor.toArray();
@@ -70,15 +71,13 @@ async function run() {
     res.json( result)
   })
 
-  // GET SINGLE OFFERS
-
-  
   // GET LOGGED USER ORDERS
   app.get('/booking/:email', async (req,res)=>{
     const result = await bookingCollection.find({email: req.params.email}).toArray();
     res.json(result)
   })
 
+    //HERE GET SINGLE INFORMATION
   app.get('/booked/:id', async (req,res)=>{
     const id = req.params.id;
     const query = {_id: ObjectId(id)};
@@ -93,21 +92,21 @@ async function run() {
   res.json(offers);
   });
   
-  // GET SINGLE OFFERS
+
   app.get('/flights/:id', async (req,res)=>{
     const id = req.params.id;
     const query = {_id: ObjectId(id)};
     const flights = await CollectionFlights.findOne(query)
   res.json(flights);
   });
-  // GET SINGLE OFFERS
+
   app.get('/tours/:id', async (req,res)=>{
     const id = req.params.id;
     const query = {_id: ObjectId(id)};
     const tours = await CollectionTour.findOne(query)
   res.json(tours);
   });
-  // GET SINGLE OFFERS
+
   app.get('/bus/:id', async (req,res)=>{
     const id = req.params.id;
     const query = {_id: ObjectId(id)};
@@ -117,8 +116,6 @@ async function run() {
  
 
  
-
-
 
   } 
   
