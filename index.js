@@ -63,6 +63,13 @@ async function run() {
   res.send(booking);
  });
  
+  // here put booking data
+  app.post('/booking', async (req,res) => {
+    const user = req.body;
+    const result = await bookingCollection.insertOne(user);
+    res.json( result)
+  })
+
   // GET SINGLE OFFERS
 
   
@@ -72,49 +79,44 @@ async function run() {
     res.json(result)
   })
 
+  app.get('/booked/:id', async (req,res)=>{
+    const id = req.params.id;
+    const query = {_id: ObjectId(id)};
+    const booking = await bookingCollection.findOne(query)
+  res.json(booking);
+  });
+
   app.get('/offers/:id', async (req,res)=>{
     const id = req.params.id;
     const query = {_id: ObjectId(id)};
-    const booking = await CollectionHotel.findOne(query)
-  res.json(booking);
+    const offers = await CollectionHotel.findOne(query)
+  res.json(offers);
   });
   
   // GET SINGLE OFFERS
   app.get('/flights/:id', async (req,res)=>{
     const id = req.params.id;
     const query = {_id: ObjectId(id)};
-    const booking = await CollectionFlights.findOne(query)
-  res.json(booking);
+    const flights = await CollectionFlights.findOne(query)
+  res.json(flights);
   });
   // GET SINGLE OFFERS
   app.get('/tours/:id', async (req,res)=>{
     const id = req.params.id;
     const query = {_id: ObjectId(id)};
-    const booking = await CollectionTour.findOne(query)
-  res.json(booking);
+    const tours = await CollectionTour.findOne(query)
+  res.json(tours);
   });
   // GET SINGLE OFFERS
   app.get('/bus/:id', async (req,res)=>{
     const id = req.params.id;
     const query = {_id: ObjectId(id)};
-    const booking = await CollectionBus.findOne(query)
-  res.json(booking);
+    const bus = await CollectionBus.findOne(query)
+  res.json(bus);
   });
  
-  // here get booking data
-  app.post('/booking/:id', async (req,res) => {
-    const id =req.params.id;
-    const query={_id:ObjectId(id)}
-    const result = await bookingCollection.findOne(query);
-    res.json( result)
-  })
-  // here put booking data
-  app.post('/booking', async (req,res) => {
-    const user = req.body;
-    const result = await bookingCollection.insertOne(user);
-    res.json( result)
-  })
 
+ 
 
 
 
